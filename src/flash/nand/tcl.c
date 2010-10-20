@@ -359,6 +359,7 @@ COMMAND_HANDLER(handle_nand_dump_command)
 {
 	struct nand_device *nand = NULL;
 	struct nand_fileio_state s;
+	int filesize;
 	int retval = CALL_COMMAND_HANDLER(nand_fileio_parse_args,
 			&s, &nand, FILEIO_WRITE, true, false);
 	if (ERROR_OK != retval)
@@ -386,10 +387,9 @@ COMMAND_HANDLER(handle_nand_dump_command)
 		s.address += nand->page_size;
 	}
 
+	retval = fileio_size(&s.fileio, &filesize);
 	if (nand_fileio_finish(&s) == ERROR_OK)
 	{
-		int filesize;
-		retval = fileio_size(&s.fileio, &filesize);
 		if (retval != ERROR_OK)
 			return retval;
 
