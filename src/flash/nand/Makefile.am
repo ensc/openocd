@@ -26,6 +26,7 @@ NAND_DRIVERS = \
 	s3c2443.c \
 	s3c6400.c \
 	at91sam9.c \
+	pxa168.c \
 	nuc910.c
 
 noinst_HEADERS = \
